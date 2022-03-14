@@ -1,0 +1,20 @@
+ul{
+    list-style-type: none; margin: 0; padding: 0; width: 200px; background-color: white;  
+}
+li a {
+    display: block; color: black; padding: 8px 16px; text-decoration: none; text-align: center;
+}
+li a:hover{
+    background-color: #555; color: white;
+}
+.active{
+    background-color: green; color: white;
+}
+
+.banner{
+    height: 600px; margin: auto;
+    background-image: url('ua.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
