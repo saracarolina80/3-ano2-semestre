@@ -1,0 +1,38 @@
+O diagrama representado descreve um modelo de vários casos de utilização do processo de compras online.
+O ator web customer usa um determinado site para realizar compras online.
+
+
+
+O web customer, que é o indivíduo que visita a internet, pode ser representado por duas formas: um cliente já registado ou um novo cliente que se pode ou não registar online (“New Customer”). 
+
+O registo de um cliente (“Cliente Register”) poderá passar por um serviço de autenticação ("Authentication").
+
+O caso de utilização "View Items" pode ser um fluxo de ações, como por exemplo, abrir a página web, fazer Login, escolher o produto, navegar nas páginas de opções de acessórios...
+Tanto o cliente registado como o não registado pode efetuar o use case "View Items" da loja online, tendo em conta que este caso de utilização pode passar por um processo de autenticação e/ou um processo de identificação.
+
+O checkout também é um fluxo de várias ações (e.g pagar produto, escolher método de pagam). O método de pagamento pode ser pelo use case "Paypal" ou "Credit Payment Service". O checkout poderá passar por um processo de autenticação ou forma de identificação.
+
+O caso de utilização "Make Purchase" inclui tanto o caso de utilização "View Items" como o "Checkout", isto é, para um cliente registado efetuar uma compra online significa que tem que passar pelo "View Items" e pelo pagamento/escolha do produto. Logo, os clientes visitantes mas n registados n podem compras items.
+
+
+
+
+
+__________________________________________________-
+PROF:
+
+register customer: visitante registado     
+new costumer: visitante 	
+
+view items: abrir página, escolher produto, ver páginas de detalhe ....
+
+checkout: pagar, esolher método de pagamento ...
+
+
+
+
+
+
+	 
+
+
