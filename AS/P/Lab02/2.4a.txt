@@ -1,0 +1,20 @@
+a)
+	  Sistema SISO
+--> Atores:
+- Utente
+- Médico Assistente
+- Administrativo
+- Médico Dentista
+
+--> Casos de Utilização:
+- Emissão do CD : o MA emite uma referenciação para cuidados orais, utilizando o software habitual de apoio à consulta
+
+- Pesquisar o cheque apresentado  :O MD pesquisa no SISO o cheque que lhe é presente
+ -- insert --
+- Consultar a informação associada do utente : O MD consulta a informação associada do utente  
+
+- Registar os diagnósticos feitos e um plano de tratamento : No decurso da primeira consulta, o MD deve registar no SISO os diagnósticos feitos e um plano de tratamento.
+
+- Registar tratamentos realizados de cada consulta : Os tratamentos realizados no decurso de cada consulta devem ser registados no SISO
+
+-- DEVE HAVER MAIS CASOS DE UTILIZAÇÃO QUE ME PASSARAM AO LADO DE CERTEZA :`)
