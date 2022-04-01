@@ -1,0 +1,8 @@
+Bridge/Switch ID : cada switch é identificado por um identificador de 8 bytes, sendo que:
+2 bytes prioritários definidos pela configuração
+6 bytes pertencem ao endereço MAC
+
+
+Root Switche/bridge : Switch escolhido como a raiz da spanning tree. Switch com o lowest ID.
+
+Path cost: Custo associado a cada porta.
