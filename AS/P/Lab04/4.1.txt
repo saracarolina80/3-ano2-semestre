@@ -1,0 +1,2 @@
+A interação modelada no Diagrama 1 referente ao processo de pagamento com o serviço Apple Pay é composta por 5 objetos e 1 ator (User).
+Esta começa quando o User envia o pedido de checkout para a IOS Application, que consequentemente gera um pedido de pagamento para o PassKit View Controler. Este objeto responde ao User com um pedido de autorização de pagamento, e com os endereços de envio.
