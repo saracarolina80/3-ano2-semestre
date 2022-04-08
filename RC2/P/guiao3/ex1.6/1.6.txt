@@ -1,0 +1,1 @@
+Quando o split-horizon está desligado o router 1 recebe todas as redes

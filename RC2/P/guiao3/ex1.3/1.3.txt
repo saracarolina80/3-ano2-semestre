@@ -1,0 +1,9 @@
+- pacotes RIP enviados por todos os routers são do tipo: response
+- são enviados periódicamente (~30 segundos)
+
+IPv4 destination : 255.255.255.255
+tansport protocol : UDP
+
+src port and dst port : 520
+
+Esta a ser usado ou nao?

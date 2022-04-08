@@ -1,0 +1,2 @@
+
+Agora como o metodo estático acresce uma distância de 200, o IP aprendido pelo RIP tem menor valor de distância do que aquele usado pela rota estática

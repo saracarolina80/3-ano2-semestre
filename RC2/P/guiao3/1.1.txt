@@ -1,0 +1,23 @@
+USAR ROUTER 7200 
+
+
+Para configurar os endereços IPv4,
+
+nos PC's: 	  - ip .......
+             - save
+
+nos routers: - configure terminal
+ 		  - interface FastEthernet x/x
+		  - ip add .....
+		  - no shutdown
+		  - end
+             - write
+
+/25 -> 255.255.255.128
+
+
+
+Routing tables:
+
+C : connected
+L : link ( tem sempre uma mascara de 32 bits)

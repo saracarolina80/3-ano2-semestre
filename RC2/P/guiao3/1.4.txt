@@ -1,0 +1,3 @@
+RIPv2
+
+esta versão anuncia todas as máscaras, ou seja, as redes podem ter máscaras diferentes, pois as mensagens rip têm informação das máscaras

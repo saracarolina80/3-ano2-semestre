@@ -1,0 +1,17 @@
+RPv2
+
+type: response
+IPv4 destination: 224.0.0.9
+transport protocol: UDP
+src and dst port: 520
+
+RIP Update packet fields from RIPv2 that were nor present in RIPv1:
+- Route tag
+- Next hop
+- Netmask
+
+o splipt-horizon está a ser usado uma vez que o router não envia o vetor de distâncias completo
+
+ o RIPv2 funciona fazendo com que os routers anunciem as redes que a eles tem acesso. A rede anunciada numa interface X teve que ter sido recebida por uma interface != X.
+
+
