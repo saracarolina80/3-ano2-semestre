@@ -1,0 +1,4 @@
+OSPF
+
+protocolo tipo link-state
+todos os routers vão ter que conhecer a topologia completa da rede.

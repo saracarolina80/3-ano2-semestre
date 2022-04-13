@@ -1,0 +1,7 @@
+
+Router 1:
+
+- OSPF router id:
+- DR:
+- BDR:
+- custo : 1
