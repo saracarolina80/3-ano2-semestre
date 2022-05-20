@@ -1,0 +1,3 @@
+>> Why is not the static route active in the routing table?
+Porque o tunel ainda não tem um IP atribuído.
+(Coisa que só é feita no ex 1.3)

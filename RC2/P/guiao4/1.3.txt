@@ -1,0 +1,4 @@
+>> Verify the routing table (if the static route is active).
+>> What do you conclude about the requirement to assigned an IP network to the tunnel connection?
+
+Agora a static route já está ativa pois já ao foi atribuido um IP tunel. 
