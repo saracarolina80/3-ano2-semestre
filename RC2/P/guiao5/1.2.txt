@@ -1,0 +1,7 @@
+
+>> Why some routes are marked as valid in the BGP table, but not chosen as best and not placed on the
+routing table?
+Porque um router BGP nunca enchaminha um caminho aprendido de um vizinho iBGP para outro vizinho iBGP, mesmo que esse caminho seja o melhor. 
+
+>> How the BGP's NEXT-HOP attribute (from an external route) is propagated inside the AS?
+Para eBGP, o endereço do next-hop é o endereço IP da conexão entre os pares
