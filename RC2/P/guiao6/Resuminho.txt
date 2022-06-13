@@ -1,0 +1,72 @@
+VoIP : 
+Conjunto de protocolos e equipamentos que permitem a codificação, transporte e encaminhamento de chamadas áudio/video através de redes IP. As streams de áudio/video são codificadas e encapsuladas em pacotes IP para serem transportados na rede (é necessário a devida sinalização (processos de interação entre nós de uma rede por forma a controlar chamadas)).
+
+VoIP tem como grandes vantagens os custos reduzidos (não é preciso pagar) e o facto de não depender de operadores. Como a qualidade é semelhante à dos telefones, existem várias companhias a investir nestes serviços por diversas aplicações.
+
+
+A perda razoável de pacotes IP (devido ao congestionamento da rede) não é crítica, uma vez que perdendo informação, esta é retirada de algum lado (ou resolução de imagem ou resolução do som)... o ritmo de perda de pacotes tolerável pode ser entre 1 a 10%.
+
+Os atrasos são críticos, apesar de que se o atraso for constante, as pessoas adaptam-se. O máximo atraso tipicamente tolerável é de 400 ms.  No entanto quando o atraso não é sempre o mesmo, as pessoas não se conseguem adaptar, o que torna assim as variações de atraso bastante críticas.
+
+Exige estabelecimento de sessão, ou seja, a origem e o destino tem de aceitar as condições de estabelecimento.
+
+
+P2P (Peer-to-Peer) : 
+Rede onde cada computador presente nela pode agir como cliente ou servidor para outros computadores na rede, permitindo partilha de dados (audio, video, informação, etc). 
+
+SIP  (Session  Initiation  Protocolo):
+
+É um protocolo baseado em texto, similar ao HTTP (com pedidos num sentido equivalente aos métodos HTTP e respostas numéricas também equivalente).
+   
+Permite criar, modificar, terminar sessões multimédia entre dois ou mais participantes.
+
+Transportado por UDP ou TCP. 
+
+É um protocolo P2P. 
+
+UAs (user agents) : pares numa sessão
+
+UAC (user-agent client) : aplicação cliente que inicia o pedido SIP
+
+UAS (user-agent server) : aplicação servidor que contacta com o utilizador quando o pedido SIP é recebido e retorna uma resposta em nome do utilizador.
+
+*** Em video-conferências muitas vezes faz-se chamadas diretas, ou seja, estabelece-se uma videoconferencia diretamente para o destino, por isso é que os sistemas de video-conferências têm endereços públicos. ***
+
+
+O SIP possuiu as seguintes funcionalidades:
+
+User location : determinação da localização do sistema a ser usado para comunicação
+User availability : determinação do estado de comunicação. ( verificar se está ocupado etc etc )
+User capabilities : definição das capacidades dos equipamentos 
+Session setup : estabelecimento da chamada ("ringing")
+Session management : incluir ou modificar os parâmetros da sessão 
+
+Uma mensagem SIP é tanto um pedido do cliente para o servidor como uma resposta do servidor para o cliente.  
+
+REQUESTS (PEDIDOS)
+
+O SIP usa o URI(uniform resource indicators) para indicar o utilizador ou serviço para o qual o pedido está sendo endereçado.
+       exemplo: sip: John@doe.com
+
+request-line = METHOD (o que se quer fazer) space REQUEST-URI (quem se quer contactar) space SIP-VERSION (versão deverá ser SIP/2.0 )
+
+Os diferentes métodos são:
+
+INVITE : Estabelecer a chamada
+ACK : Fazer o reconhecimento
+OPTIONS : Definir opções da sessão
+BYE :  Terminar a chamada já estabelecida
+CANCEL  : Terminar a chamada que não foi estabelecida
+REGISTER : Registar o utilizador no servidor
+SUBSCRIBE : Subscrever as notificações do utilizador
+NOTIFY : Notificar o cliente
+PUBLISH : Mudar o estado do utilizador
+MESSAGEM : Enviar mensagens
+
+ Exemplo: INVITE sip:2001@192.168.56.101 SIP/2.0
+
+
+SDP (Session Description Protocol) 
+
+Protocolo que descreve os parametros para se iniciar uma sessão multimedia (SIP), como o anuncio de uma sessão, pedidos para join, etc. Tal como o SIP não transfere informação, mas entra no papel de negociação de uma sessão
+
