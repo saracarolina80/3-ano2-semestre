@@ -1,0 +1,37 @@
+Conceito de túnel e tráfego de pacotes em túneis
+
+Os túneis servem para garantir que um pacote que atinja um nó de uma rede seja levado para uma rede secundária em específico, idependentemente dos encaminhamentos em processamento intermediário.
+Garantem, também, a entrega de um pacote a um nó remoto mesmo quando os nós das redes intermediárias não suportam os protocolos que neles seguem.
+
+No fundo é criada uma forma de mascarar os pacotes, adicionando-lhes um cabeçalho extra de um novo protocolo de rede, como IPv4 ou IPv6, para lidar com a entrega ao ponto de saída do túnel.
+
+ 
+
+
+
+VTI (Interfaces virtuais de túnel):
+
+Construção lógica que cria uma interface de rede virtual que pode ser vista como qualquer outra interface dentro de um equipamento de rede.
+Um túnel não precisa de ter qualquer endereço IP, para além daqueles que já ligados ao router de saída.
+No entanto, grande parte das implementações exigem que um endereço de rede deve estar ligado a uma interface de rede de forma a permitir processamento IP da interface.
+
+
+Assim, uma VTI precisa:
+Um identificador numérico (tunnel 1, tunnel 2,...)
+Um endereço IP cativo, que permita o processamento por IP, adicionar a interface do túnel à tabela de routing e permite routing pela interface
+Um modo de túnel especificado
+Origem do túnel
+Destino do túnel
+
+Mais uma vez aconselha-se o uso das interfaces de loopback para a integração de túneis, uma vez que estas nunca vão abaixo a não ser que o próprio equipamento também 
+se desligue.
+
+Tipos de túneis
+
+IPv4-IPv4: pacote normal IPv4 que é transportado com um cabeçalho igualmente de IPv4
+IPv6 sobre IPv6: faz precisamente o mesmo, mas com IPv6
+IPv4 sobre IPv6: pacote IPv4 é transportado com um cabeçalho externo IPv6
+IPv6 sobre IPv4: pacote IPv6 é transportado com um cabeçalho externo IPv4
+O túnel GRE pode ser instalado sobre IPv4 ou IPv6
+
+
