@@ -1,0 +1,77 @@
+﻿		Network Design Models
+
+Como objetivos dos designs, uma rede deve ser:
+
+- Modular -> Suporta o crescimento e mudança. Escalar a rede deve ser fácil apenas adicionando ou retirando módulos, sem necessitar de ser
+completamente redesenhada.
+
+- Resiliente -> Tempo de funcionamento perto de 100%, apesar da resiliência ter um custo
+
+- Flexível -> Negócios mudam e evoluem, e a rede deve ajustar-se rapidamente
+
+
+<< Modelo Hierárquico da Rede >>
+
+>>> Nivel de Acesso: Permite ao utilizador aceder à rede. Geralmente incorpora dispositivos com LAN switch
+Para utilizadores remotos e sites remotos, fornece uma forma de entrar na rede através de WAN.
+
+Grande visibilidade
+	Redundância de default gateways usando múltiplas conexões de access switches e a layer switches.
+
+
+>>> Nivel de Distribuição: Agrega dispositivos LAN. Segmenta grupos de trabalho e isola problemas na rede.
+	Usa uma combinação de Layer 2 e multilayer switching para segmentar a rede.
+	Implementa QoS, segurança, balanceamento de carga, e politicas de routing.
+	Principais preocupações no design:
+		Grande disponibilidade;
+		Load balancing;
+		QoS;
+		Provisionamento.
+
+>>> Nivel Core: Veloz. É critico para a conectividade, deve estar disponível o mais possível e adaptar-se a mudanças rapidamente.
+	Deve proporcionar escalabilidade, alta visibilidade, e convergência rápida para a rede.
+		O nível deve escalar facilmente.
+		Rápido, usando aceleração de hardware se possível.
+		Redundância e rápida adaptabilidade
+
+\\ Módulos de Rede
+
+Campus
+	Opera no centro de uma empresa.
+	É o módulo pelo qual a maioria dos utilizadores acede á rede.
+	Combina uma infraestrutura de routing e switching inteligente, com mobilidade e segurança avançada.
+
+Data Center
+	Data Centers redundantes providenciam backups e replicação de aplicações.
+	Balanceamento de carga para maximizar performance.
+	Permite a empresa escalar sem grande mudanças na rede.
+	Pode estar localizada localmente ou off site.
+
+Sucursal
+	Permite extender aplicações e serviços pela rede e por utilizadores.
+	Fornece um acesso seguro para voz, informação sensível e video.
+	Arquitetura robusta e com altos níveis de resiliência.
+
+WAN e MAN
+	Convergência de voz, video e serviços de informação.
+	Uma abordagem eficiente em custo para uma grande area geográfica.
+	QoS, níveis de serviço granulares, encriptação.
+	Segurança é alcançada através de VPNs.
+
+Utilizadores Remotos
+	Permite fornecer serviços de voz e dados a locais remotos a partir de acesso standard a serviços de broadband.
+
+
+
+ ««« VLANs em Pontos de Acesso »»»
+
+AP tem portas trunk para switches de distribuição/core.
+VLANs "cabladas" podem ser extendidas para o domínio wireless.
+Cada SSID pode ser mapeado para uma VLAN.
+	- Cada um destes pares pode ter politicas de segurança diferentes.
+
+Devem ser configuradas end-to-end.
+	-Mobilidade e mudança de AP não devem quebrar a conectividade de layer 3.
+	-Um endereço IP deve ser o mesmo, para o mesmo utilizador, mesmo quando este se move e muda de AP.
+
+Uma VLAN nativa deve proporcionar capacidade de gestão e de autenticação de utilizadores.

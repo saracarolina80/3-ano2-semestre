@@ -1,0 +1,108 @@
+﻿
+		Spanning Tree Protocol (STP)
+
+Uma rede com redundância tem (quase) sempre loop. 
+O protocolo STP permite à rede bloquear dertiministicamente portas e criar uma topologia sem loops  numa rede com ligações redundantes.
+
+«« Curiosidade: mesmo que uma rede seja construída sem loops, convém que os switches tenham STP e este esteja ativado»»
+
+Os switches "falam entre si", usando um dos protocolos STP, e decidam quais das portas vão estar no estado bloqueado.
+
+Blocked port -> porta que deixa de ser usada pelo switch para fazer switching. Continua ativa, mas deixa de mandar pacotes e aprender endereços MAC.
+
+
+ --- Algoritmo de Bellman-Ford (distribuído e assíncrono)
+	Routing
+
+Caminho mais curto de X para A = custo de ligação de X para o nó que se segue no caminho mais curto para A + caminha mais curto desse nó para A
+
+( custo do vizinho + custo da ligação até a esse vizinho)
+
+
+ 1º) É escolhido um nó origem/raiz
+
+ 2º) Todos os nós usam o Algoritmo de Bellman-Ford para calcular os nós vizinhos ( e respetivo custo até esses), que comportam o menor custo até ao nó raiz
+ 
+O conjunto de ligações usados por todos os nós para criar o caminho mais curto até à origem, são chamados de Spanning Tree.
+
+
+Em suma, cada nó transmite, periodicamente, para todos os seus vizinhos a estimativa do custo entre si mesmo e um nó destino R. Ao receber essa mensagem
+cada nó vai calcular, também, a sua estimativa entre si próprio e o nó R.
+Adiciona ao valor recebido, o valor da sua estimativa de custo entre ele o vizinho que enviou a mensagem.
+Por fim escolhem-se os vizinhos que tiverem menor custo entre si.
+# Se mais que uma ligação é usada para ligar ao "melhor" vizinho, é usado o que tiver o identificador de porta mais baixo. #
+Os switches escolhem, assim, quais são as portas que vão estar bloqueadas e as portas que vão estar ativas
+
+
+--- Conceitos básicos de STP ---
+
+Todos os equipamentos têm que ter um identificador:
+
+- Switch ID » cada switch é identificado com um identificador de 8 bytes baseado em:
+	- Prioridade - 2 bytes (pode ser configurada)
+	- Endereço MAC - 6 bytes
+O gestor de rede pode manipular o identificador do switch, mas apenas mexendo nos 2 primeiros bytes.
+A prioridade permite definir se um ID de um switch é maior ou menor em relação aos vizinhos
+
+- Root Switch » Switch escolhido como origem/root da spanning tree
+	- A raíz será o switch que tiver o ID mais baixo.
+
+«« Se quisermos que um switch seja a raíz, a prioridade tem que ser diminuida »»
+
+- Custo do caminho » Custo associado a cada porta 
+	-Tem um valor default, mas pode ser reconfigurado
+
+- Designated Bridge » Switch responsável por encaminhar pacotes, de e para o, segmento de Ethernet ao segmento root.
+
+- Porta designada » Porta da designated bridge que conecta ao segmento de Ethernet
+
+- Root Port » Porta da designated bridge que se conecta ao caminho para o root
+
+Todas as portas que não sejam nem raíz nem designadas vão estar bloqueadas.
+
+[ Estados de portas possíveis ]
+~ Blocking: Aprendizagem de endereços MAC e encaminhamento de pacotes desativado.
+	        Recebe e processa BPDU
+	        Se passar algum tempo (MaxAge) deixar de receber mensagens de outro switch, vai passar para o estado de Listening
+
+~ Listening: Não faz fowarding nem aprende endereços
+	         Recebe e processa BPDU
+	Parecido ao blocking, mas já em tempo de pré-preparação para começar a processar "coisas"
+
+~ Learning: Ainda não faz fowarding mas já começa a aprender endereços MAC.
+	       Recebe e processa BPDU
+
+~ Fowarding: Já faz fowarding e aprende endereços MAC
+	           Recebe e processa BPDU
+Fowarding state é o estado "normal" = portas ativas
+
+~ Disabled: Aprendizagem de endereços MAC e encaminhamento de pacotes desativado.
+	        Não recebe BPDU
+	       (Praticamente como eu, não serve para nada)
+--------------------------
+	BPDUs (Bridge Protocol Data Units)
+
+Para construir a spanning tree, os switches trocam mensagens especiais entre eles chamados de BPDU.
+
+Podem ser de dois tipos:
+	- Configuração:
+		Campos mais relevantes
+			' Root ID: ID do switch raiz atual
+			' Root Path Cost: estimativa do custo para a root
+			' Bridge ID: Identificador da própria bridge
+			' Port ID: Identificador da porta pela qual o BPDU foi enviado
+				port priority + nº da porta
+
+	- Notificações de mudança de topologia (para os switches saberem que está a haver uma reconfiguração da rede)
+		
+
+Periodicamente (hello time) o switches vão mandar Conf-BPDUs pelas suas portas designadas
+
+
+----------------- Tempo de Vida das Entradas na Tabela de Encaminhamento ----------
+
+Tempo de vida longo: Vários pacotes vão ser perdidos quando a rede mudar de topologia
+É usada do default
+
+Tempo de vida curto: Cria tráfego em excesso devido a flooding frequente. 
+Usado quando a SPT é reconfigurada
