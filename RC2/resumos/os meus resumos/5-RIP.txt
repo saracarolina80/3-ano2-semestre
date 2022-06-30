@@ -1,0 +1,95 @@
+﻿			RIP (Routing Information Protocol)
+
+O RIP é um protocolo distance vector.
+
+Cada router mantem uma lista de redes conhecidas e, para cada rede, uma estimativa do custo para lá chegar
+Periodicamente, cada router envia uma estimativa do custo para os seus vizinhos (update)
+
+
+- O custo do caminho para o destino é dado pelo nº de router/hops no caminho, sendo o seu máximo 15
+(ou seja, o nº de saltos de um determinado router até ao destino é no máximo 15)
+ O número 16 significa que o custo é infinito, ou seja, serve para notificar que a rede já não está acessível.
+
+Cada router determina as entradas na sua tabela de routing com base na construção do vetor distância
+	Para cada rede destino aprendida, adiciona uma entrada na rede que usa o caminho com menor custo, 
+usando como next-hop o router vizinnho que anunciou o caminho com menor custo para essa rede
+
+
+ <<< RIPv1 >>>
+É chamado de protocolo classfull. (dependente das classes)
+	Não anuncia máscaras de redes, apenas prefixos.
+	A máscara das rede é assumida igual á da interface que recebeu a mensagem.
+
+Usa o endereço de broadcast 255.255.255.255 para enviar anúncios/updates.
+Não suporta autenticação.
+	As mensagens podem ser forjadas por atacantes
+
+Este protocolo tem um grande problema na atualidade, não é aplicável a sub-redes.
+
+Para tal foi criada uma nova versão:
+ <<< RIPv2 >>>
+Protocolo classless. (independente das classes)
+	Para além dos prefixos de rede anunciam também as máscaras de rede.
+	Suporta máscaras de tamanho variável.
+
+Usa o endereço de multicast 224.0.0.9 para enviar anuncios/updates para os routers que estejam a usar RIPv2.
+Suporta autenticação usando message-digest e password em clear text.
+	A password em clear text não deve se usada por segurança
+
+-- Não está aqui mas perceber o algoritmo do RIP --
+
+<<Split-horizon>>
+É a solução para a contagem para o infinito. Cada router, em cada interface, anuncia apenas as redes nas quais essa 
+interface não é utilizada como melhor caminho.
+Baixa os tempos de convergência das tabelas de routing quando existe uma mudança de topologia
+
+No split-horizon com Poisoned Reverse, os routers anunciam todas as redes mas colocam a metrica a infinito (16) para redes
+aprendidas pela interface pela qual estão a enviar o anúncio
+
+Previne loops de routing que envolvam dois routers.
+
+
+<< Tipos de mensagens do RIP >>
+
+-> RIP Request: Enviado por um router recentemente ligado, ou quando expirar a validade de um vetor distância.
+Pode pedir informação específica, ou a distância vetor completa de um vizinho.
+
+-> RIP Response: Anuncio do vetor de distância.
+	É envidado:
+		1 - Periodicamente : ~30s aproximadamente, com uma componente de aleatoriedade.
+		2 - Opcional : Quando existe uma mudança de dados.
+		3 - Resposta ao RIP Request
+
+No RIPv2 as mensagens de response possuem novos campos, como:
+	- Máscara da rede: Suporta máscaras de tamanho viável
+	- Router tag: Atribuido a uma rede específica que tem de ser preservado e re-anunciado. com uma rota e
+que fornece um método de separação da rede interna da externa
+	-Next Hop: Endereço para onde os pacotes devem ser enviados
+
+<<< Triggered Updates >>>
+Previne loops de routing que envolvam dois ou mais routers.
+Sempre que um router muda a métrica para uma rota, é necessário enviar uma mensagem quase que imediatamente,
+mesmo que ainda não seja altura para uma mensagem de update normal.
+Routers vizinhos atualizam as suas tabelas de routing mais rápido e a convergência é geralmente mais rápida.
+	Incluindo entradas que foram removidas por timeout.
+
+
+<<< RIPng >>>
+As versões anteriores não suportam endereçamento IPv6. Para isso foi criado a versão RIPng, equivalente ao RIPv2 mas só
+que para endereçamento IPv6
+
+Cada interface do router tem um custo de RIPng associado.
+O custo total entre um router e uma rede é dado pela soma de todos os custos de RIPng das interfaces dos routers pelo caminho.
+
+<<< RIPng vs. RIPv2 >>>
+
+Usa IPv6 para transporte.
+Prefixo IPv6, next-hop e endereço link-local.
+Usa grupo de endereços multicast FF02::9 como endereço destino dos updates de RIP.
+Os routers adicionam sempre o custo da interface ao da métrica recebida.
+	Métrica é a soma dos custos das interfaces de output para o destino.
+Permite custos por nó/interface diferentes de 1.
+	O Cisco chama a isto "custo de offset" por interface.
+	O custo para a rede é dado pela soma dos custos das interfaces de output pelo caminho.
+Os routers anunciam sempre redes diretamente conectadas.
+

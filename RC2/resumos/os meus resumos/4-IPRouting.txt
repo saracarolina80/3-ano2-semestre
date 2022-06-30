@@ -1,0 +1,87 @@
+﻿			IP Unicast Routing
+
+---- Conceito de Sistema Autónomo ----
+AS -> conjunto de router/redes com uma política de routing comum e sob a mesma administração
+
+Routing dentro de uma AS é alcançada através de IGPs como RIPv1, RIPv2, OSPF,...
+
+Routing entre sistemas autónomos é através de EGPs como BGP.
+
+IGPs e EGPs têm objetivos diferentes:
+	IGPs: otimizar a performance do routing.
+	EGPs: otimiza a performance do routing, obedecendo a politicas de economia, segurança e politica.
+
+
+
+	---- Revisão IP Routing ----
+
+Como gestor de redes, queremos interligar um conjunto de redes.
+Existem 3 maneiras de isso se fazer (apesar que nesta cadeira só aprofundamos 2):
+ou seja - Um router pode ficar a saber da existência de redes através de:
+
+-> Routing estático: Configuração manual pelo administrador. Não é flexivel a alterações ou problemas na rede
+
+A grande desvantagem das rotas estáticas é que não de adaptam a mudanças de topologia da rede, ficando dependente
+ do administrador, ou seja, este necessita de tomar o total controlo.
+
+
+-> Routing dinâmico: Aprendido de outros routers, o que necessita de protocolos de encaminhamento.
+Atenção que os routers trocam informação apenas com outros routers com o mesmo protocolo.
+As mudanças na rede são propagadas pelos routers de forma a cada um adaptar as suas tabelas de routing.
+
+Permite à rede ajustar-se a mudanças de topologia automaticamente.
+
+(extra)-> Routing baseado em políticas: Regras implementadas manualmente que se sobrepõem ao routing dinâmico e estático mas que podem depender de outros
+parâmetros para além do IP destino.
+ 
+
+
+<-<-< Default Routes >->->
+
+Em algumas circunstâncias, o router não necessita de reconhecer os detalhes da rede remota.
+Assim, o router configurado para enviar todo o tráfego (que já não possua uma rota específica) para um router vizinho específico, este é conhecido por router de omissão
+A rota de omissão pode ser colocada de forma estática ou dinâmica.
+
+IPv4 default route - 0.0.0.0/0
+IPv6 default route - ::/0
+
+
+<-<-< Distância Administrativa >->->
+A maioria dos protocolos de routing possuem estruturas métricas e algoritmos que são incompatíveis com outros protocolos.
+É critico que uma rede que use múltiplos protocolos de routing seja capaz de trocar informação de rotas e seja capaz de selecionar o melhor caminho pelos
+múltiplos protocolos.
+
+Os routers usam um valor chamado de distância administrativa (valor configurável) para selecionar o melhor caminho quando aprendem de diferentes protocolos de routing
+o melhor destino (mesmo prefixo de rede e tamanho de máscara).
+
+O protocolo com a distância administrativa mais baixa é o preferido.
+
+
+<-<-< Distance Vector vs Link State protocols >->->
+
+Existem dois tipos de protocolo de encaminhamento interno:
+
+ --> Vetor Distância: Cada router aprende o melhor caminho da rede a partir da informação enviada periodicamente pelos seus vizinhos
+Cada router aprende o caminho mais curto para cada rede conhecida com base numa versão distribuída e assíncrona do algoritmo de Bellman-Ford.
+
+Exemplos: RPv1, RPv2 ..
+
+--> Link State: Routers aprendem a topologia completa da rede e usam um algoritmo centralizado para determinar o caminho mais curto para as redes conhecidas.
+A informação necessária para construir e manter, em cada router, uma base de dados da topologia da rede, é obtida por um processo de flood.
+A informação da rede só é trocada no bootstrap e depois de cada mudança da topologia.
+
+Exemplos: OSPF, IS-IS
+
+
+<-<-<Tipos de rede >->->
+
+= Trânsito/Transporte: usado para interligar redes.
+	Os router usam-nas para trocar informação
+Transportam tráfego de/para hosts de outras redes, e para/de os próprios hosts
+
+= Stub: Rede com apenas um router, ou com múltiplos router se estes não trocarem informação
+Apenas transporta tráfego entre os próprios hosts.
+
+
+
+

@@ -1,0 +1,74 @@
+﻿			Traffic Tunneling	
+
+<< Conceito de túnel e tráfego de pacotes em túneis >>
+
+Os túneis servem para garantir que um pacote que atinja um nó de uma rede seja levado para uma rede secundária em específico, idependentemente dos encaminhamentos em processamento intermediário.
+Garantem, também, a entrega de um pacote a um nó remoto mesmo quando os nós das redes intermediárias não suportam os protocolos que neles seguem.
+
+No fundo é criada uma forma de mascarar os pacotes, adicionando-lhes um cabeçalho extra de um novo protocolo de rede, como IPv4 ou IPv6, para lidar com a entrega ao ponto de saída do túnel.
+
+ 
+ <<< VTI (Interfaces virtuais de túnel): >>>
+
+Construção lógica que cria uma interface de rede virtual que pode ser vista como qualquer outra interface dentro de um equipamento de rede.
+Um túnel não precisa de ter qualquer endereço IP, para além daqueles que já ligados ao router de saída.
+No entanto, grande parte das implementações exigem que um endereço de rede deve estar ligado a uma interface de rede de forma a permitir processamento IP da interface.
+
+
+Assim, uma VTI precisa:
+	Um identificador numérico (tunnel 1, tunnel 2,...)
+	Um endereço IP cativo, que permita o processamento por IP, adicionar a interface do túnel à tabela de routing e permite routing pela interface
+	Um modo de túnel especificado
+	Origem do túnel
+	Destino do túnel
+
+Mais uma vez aconselha-se o uso das interfaces de loopback para a integração de túneis, uma vez que estas nunca vão abaixo a não ser que o próprio equipamento também 
+se desligue.
+
+
+ <<< Loopback Interfaces as End-Points >>>
+
+É uma construção lógica que cria uma interface de rede virtual completamente independente do resto das interfaces físicas e lógicas do router
+
+O objetivo primário de uma interface de loopback é providenciar um endereço de rede para servir como identificador de router em configurações de rede remotas e algoritmos 
+distribuídos.
+
+A principal vantagem de usar interfaces de loopback como saídas de túneis é o facto de a criação de um túnel não cativo a nenhuma ligação de rede específica 
+que possa falhar 
+
+ <<< Tipos de túneis >>>
+
+IPv4-IPv4: pacote normal IPv4 que é transportado com um cabeçalho igualmente de IPv4
+IPv6 sobre IPv6: faz precisamente o mesmo, mas com IPv6
+IPv4 sobre IPv6: pacote IPv4 é transportado com um cabeçalho externo IPv6
+IPv6 sobre IPv4: pacote IPv6 é transportado com um cabeçalho externo IPv4
+O túnel GRE pode ser instalado sobre IPv4 ou IPv6
+
+
+<<< Overlay Network >>>
+Pode ser definida como uma rede virtual definida sobre uma outra rede
+	para um proósito específico como transportes privados, políticas de routing específcas,...
+
+A rede base pode ser também ela virtual ou física
+
+Quando qualquer nível de privacidade está presente numa rede desta natureza, passa a designar-se como uma VPN 
+
+
+<<< IPv6 Deployment Techniques >>>
+Colocar em produção IPv6 usando dual-stack backbones
+	Aplicações IPv4 e IPv6 coexistem numa camada de routing backbone de IP duplo
+	Todos os routers na rede precisam de ser atualizados para serem dual-stack
+
+Túneis de IPv6 por IPv4
+	Configurados manualmente ( com ou sem GRE)
+	Mecanismos de túnel semi-automáticos
+	Mecanismos totalmente automáticos
+
+<<< Dual Stack >>>
+Aplicações podem comunicar com ambos.
+A escolha da versão de IP é baseada na resposta de DNS e em preferências das aplicações.
+
+
+ <<< ISATAP Tunnels >>>
+Túneis point-to-multipoint que podem ser usado para conectar sistema dentro de um local.
+Usado para tunelar IPv4 como um domínio administrativo, para criar uma rede virtual IPv6 sobre uma rede IPv4.
