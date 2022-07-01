@@ -1,0 +1,28 @@
+2. Nas tabelas de encaminhamento IPv4 dos SWL3 C1 e C2, quantas rotas de omissão
+existem? E qual o custo das mesmas? Justifique.
+
+-- Rota de omissão
+Uma rota de omissão é uma rota IPv4 ou IPv6 que representa todas as redes IP desse protocolo.
+IPv4 = 0.0.0.0/0
+
+Serve para que routers 1 e 2 dizerem que são a saída para a Internet.
+
+
+Tipo 2: O QUE SE DEFINE NA ROTA DEFINE-SE NOS ROUTERS TODOS, NÃO LEVA EM CONTA OS CUSTOS DAS INTERFACES
+
+Tipo 1: JÁ LEVA EM CONTA OS CUSTOS DAS INTERFACES. A rota do tipo 1 é sempre a preferida
+
+Na tabela de encaminhamento só aparecem os caminhos de menor custo.
+
+
+3-Proponha uma alteração nas configurações do OSPF que garanta que o tráfego dos
+edifícios para a Internet seja encaminhado aproximadamente 50% pelo Router1/ISP1 e
+50% pelo Router2/ISP2. Métrica igual e tipo igual
+
+e (ii) em caso de falha do Router 1 e Router 2
+deverá ser encaminhado pelo Router B/ISP3: Meter uma rota estática de omissão a apontar para o ISP3 com uma distância administrativa superior à do OSPF  
+
+
+
+ 
+SWITCH RAÍZ É O + PROXIMO DO CENTRO DA REDE.

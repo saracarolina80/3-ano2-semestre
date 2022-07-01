@@ -1,0 +1,38 @@
+
+<< MPLS >>
+
+Pacotes são etiquetados na origem com um identificador do primeiro salto.
+Á medida que os pacotes são transportados de um router para o próximo, cada router faz uma decisão independente de encaminhamento desse pacote baseada na etiqueta.
+Vantagens
+Simplificação do encaminhamento de pacotes nos routers
+Capacidade de engenharia de tráfego
+Simplificação da gestão de rede (apenas uma camada de protocolo)
+
+
+ --> Diferença/funcionalidades entre o LDP e o RSVP-TE
+
+<< LDP >>
+-- Encaminhamento sem constrangimentos
+Label Distribution Protocol (LDP)
+O caminho é escolhido baseado no caminho mais curto de IGP
+
+-- Encaminhamento com constrangimentos
+Constrangidos pela explicitação da definição do caminho e de requisitos de performance
+Resource Reservation Protocol com engenharia de tráfego (RSVP-TE)
+	Evolução do RSVO para suportar engenharia de tráfego com distribuição de etiquetas
+Constrangimentos baseados em Routing LDP (CR-LDP)
+	Evolução do LDP para suportar encaminhamentos constrangidos
+	Obsoleto !
+Não precisa de protocolos de suporte
+<< RSVP-TE >>
+O OSPF diz que routers suportam MPLS e que largura de banda é reservável. 
+O RSVP-TE vai reservar, vai definir o caminho e trocar os labels.
+
+ --> Que protocolos de suporte que são precisos para o RSVP-TE
+Extensões do traffic engeniring do OSPF
+
+-----------------------------------------------
+
+- O estabelecimento de um domínio MPLS com LDP começa com o processo de descoberta de vizinhos que
+suportem MPLS/LDP usando mensagem UDP LDP Hello. Após a descoberta de um vizinho LDP é aberta
+uma sessão TCP através da qual é trocada a informação de mapeamento entre redes IP e labels MPLS.
