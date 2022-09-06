@@ -1,28 +1,43 @@
 # Configurar o porto RE0 como saída e o porto RB0 como entrada
+# Ler o valor do porto de entrada e escreva esse valor no porto de saída
 
-	.data
-	.text
-	.globl main
+# 1º definir os endereços dos portos (através do mapa de registos)
+		.equ SFR_BASE_HI , 0xBF88
+		
+		.equ TRISB, 0x6040
+		.equ PORTB, 0x6050
+		.equ LATB, 0x6060
+		.equ TRISE, 0x6100
+		.equ PORTE, 0x6110
+		.equ LATE, 0x6120
 
-main:	lui $t1 , SFR_BASE_HI
+		.data
+		.text
+		.globl main
 
-	lw $t2 , TRISE($t1)		# READ (Read TRISE register)
-	andi $t2 , $t2 , 0xFFFE		# MODIFY (bit 0 = 0)
-	sw $t2 , TRISE($t1)		# WRITE (Write TRISE register)
+# 2º configurar o porto de saída e o porto de entrada
+main:
+		lui $t1 , SFR_BASE_HI
+		lw $t2, TRISE($t1)
+		andi $t2 , $t2 , 0xFFFE    # bit0 = 0  -> saída
+		sw $t2 , TRISE($t1)
 
-	lw $t2 , TRISB ($t1)		# READ (Read TRISB register )
-	andi $t2 , $t2 , 0x0001		# WRITE (bit 0 = 1)
-	sw $t2 , TRISB ($t1)		# WRITE (Write TRISB register)
+		lw $t2 , TRISB($t1)
+		ori $t2 , $t2 , 0x0001		# bit0 = 1 -> entrada
+		sw $t2 , TRISB ($t1)
 
-while:	lw $t0 , PORTB($t1)
-	andi $t0 , $t0 , 0x0001		# Reads only bit 0
-	
-	lw $t2 , LATE($t1)
-	andi $t2 , $t2 , 0xFFFE
+# 3º ler o valor do porto de entrada e escreva esse valor no porto de saída
+loop:	
+		lw $t2 , PORTB ($t1)
+		andi $t2 , $t2 , 0x0001
 
-	or $t2 , $t2 , $t0		# RE0 = RB0
-	sw $t2 , LATE($t1)	
+		lw $t3 , LATE($t1)
+		andi $t3 , $t3 , 0xFFFE
+		or $t3 , $t2 , $t3
+		sw $t3 , LATE($t1)
 
-	j while
+		j loop
 
-	jr $ra
+
+		li $v0 , 0
+		jr $ra
